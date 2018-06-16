@@ -67,6 +67,7 @@ describe('fitness', () => {
 describe('walk1', () => {
 
     it('increases fitness by 4', () => {
+
         const pet = new Pet('Fido');
         pet.fitness = 4
         pet.walk();
@@ -77,9 +78,11 @@ describe('walk1', () => {
 describe('walk2', () => {
 
     it('increases fitness by to a max of 10', () => {
+
         const pet = new Pet('Fido');
         pet.fitness = 8;
         pet.walk();
+
         expect(pet.fitness).toEqual(10);
     });
 });
@@ -87,9 +90,54 @@ describe('walk2', () => {
 describe('feed', () => {
 
     it('decreases hunger by 3', () => {
+
         const pet = new Pet('Fido');
         pet.growUp();
         pet.feed();
+
         expect(pet.hunger).toEqual(2);
+    });
+});
+
+describe('checkUp fitness', () => {
+
+    it('alerts if fitness < 3', () => {
+
+        const pet = new Pet('Fido');
+        pet.fitness = 3;
+        pet.checkUp();
+        expect(pet.checkUp()).toEqual('I need a walk');
+    });
+});
+
+describe('checkUp hunger', () => {
+
+    it('alerts if hunger > 5', () => {
+
+        const pet = new Pet('Fido');
+        pet.hunger = 5;
+        pet.checkUp();
+       expect(pet.checkUp()).toEqual('I am hungry'); 
+    });
+});
+
+describe('checkUp fitness & hunger', () => {
+
+    it('alerts if fitness < 3 & hunger > 5', () => {
+        const pet = new Pet('Fido');
+        pet.fitness = 2;
+        pet.hunger = 6;        
+        pet.checkUp();
+
+        expect(pet.checkUp()).toEqual('I am hungry AND I need a walk');
+    });
+    it('alerts if fitness > 3 & hunger < 5', () => {
+
+        const pet = new Pet('Fido');
+        pet.fitness = 6;
+        pet.hunger = 4;
+        pet.checkUp();
+
+        expect(pet.checkUp()).toEqual('I feel great!');
     });
 });
