@@ -10,36 +10,60 @@ function Pet(name) {
 
 };
 
+Pet.prototype = {
+
+        get isAlive() {
+
+                return this.age < 30 && this.hunger < 10 && this.fitness > 0;
+        }
+};
 
 Pet.prototype.growUp = function() {
 
+        if(!this.isAlive) {
+                throw new Error('Your pet is dead - so dead - deader than a dead thing on dead day :(');
+
+        } else {
         this.age += 1;
         this.hunger += 5;
         this.fitness -= 3;
-
+        }
 };
 
 Pet.prototype.walk = function() {
 
-        if((this.fitness + 4) <= MAXIMUM_FITNESS) {
+        if(!this.isAlive) {
+                throw new Error('Your pet is dead - so dead - deader than a dead thing on dead day :(');
+        
+        } else if((this.fitness + 4) <= MAXIMUM_FITNESS) {
                 this.fitness += 4;
+
         } else {
                 this.fitness = MAXIMUM_FITNESS;
+
         }
 };
 
 Pet.prototype.feed = function() {
 
-        if((this.hunger - 3) >= MINIMUM_HUNGER) {
+        if(!this.isAlive) {
+                throw new Error('Your pet is dead - so dead - deader than a dead thing on dead day :(');
+
+        } else if((this.hunger - 3) >= MINIMUM_HUNGER) {
                 this.hunger -= 3;
+                
         } else {
+
                 this.hunger = MINIMUM_HUNGER;
         }
 };
 
 Pet.prototype.checkUp = function() {
 
-        if(this.fitness <= 3 && this.hunger >= 5) {
+        if(!this.isAlive) {
+                throw new Error('Your pet is dead - so dead - deader than a dead thing on dead day :(');
+        
+        } else if(this.fitness <= 3 && this.hunger >= 5) {
                 return 'I am hungry AND I need a walk';
 
         } else if (this.hunger >= 5) {
@@ -52,7 +76,5 @@ Pet.prototype.checkUp = function() {
                 return 'I feel great!';
         }
 };
-
-
 
 module.exports = Pet;
