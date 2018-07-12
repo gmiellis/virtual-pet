@@ -57,6 +57,7 @@ Pet.prototype.feed = function () {
 };
 
 Pet.prototype.checkUp = function () {
+  // comment
 
   if (!this.isAlive) {
     throw new Error('Your pet is dead - so dead - deader than a dead thing on dead day :(');
